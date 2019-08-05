@@ -4,6 +4,7 @@
 
 * Install [Python 3](https://www.python.org/downloads/)
 * `pip3 install instaloader`
+    * `cd data && instaloader profile comuacin --stories --highlights --comments --geotags --login=danielmapar`
 
 ## TODO
 
