@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  server:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/api/src
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+
+  testserver:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/api
+    depends_on:
+      - testdb
+    ports:
+      - 5053:5053
+    environment:
+      APPLICATION_PORT: 5053
+      APPLICATION_DB_CONTAINER: testdb
+    command: python -m pytest test/
+
+  testdb:
+    image: postgres:9.4
