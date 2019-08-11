@@ -1,2 +1,9 @@
-data
-data/*
+__pycache__/
+*.py[cod]
+.cache
+app/vendor/
+*.log
+.vscode
+.coverage
+coverage/
+database/data/*

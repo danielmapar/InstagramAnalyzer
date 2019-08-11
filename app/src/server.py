@@ -1,6 +1,7 @@
 from flasgger import Swagger
 from flask import Flask
 from flask.blueprints import Blueprint
+from celery import Celery
 
 import config
 import routes
@@ -36,6 +37,13 @@ server.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URI
 server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS
 db.init_app(server)
 db.app = server
+
+# Initialize Celery
+server.config["CELERY_BROKER_URL"] = config.CELERY_BROKER_URL
+server.config["CELERY_RESULT_BACKEND"] = config.CELERY_RESULT_BACKEND
+
+celery = Celery(server.name, broker=config.CELERY_BROKER_URL)
+celery.conf.update(server.config)
 
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):

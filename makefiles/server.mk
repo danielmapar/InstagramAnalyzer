@@ -1,6 +1,9 @@
 ### SERVER
 # ¯¯¯¯¯¯¯¯¯¯¯
 
+server.build: ## Build and start server in its docker container
+	docker-compose up --build server
+
 server.start: ## Start server in its docker container
 	docker-compose up server
 
@@ -10,11 +13,11 @@ server.bash: ## Connect to server to lauch commands
 server.daemon: ## Start daemon server in its docker container
 	docker-compose up -d server
 
-server.stop: ## Start server in its docker container
+server.stop: ## Stop server in its docker container
 	docker-compose stop
 
-server.logs: ## Display server logs
-	tail -f server.log
+server.down: ## Stop server in its docker container
+	docker-compose down
 
-server.upgrade: ## Upgrade pip dependencies
-	docker-compose run --rm server bash -c "python vendor/bin/pip-upgrade requirements.txt requirements-dev.txt --skip-virtualenv-check"
+server.logs: ## Display server logs
+	docker-compose logs --tail 30 --follow server worker

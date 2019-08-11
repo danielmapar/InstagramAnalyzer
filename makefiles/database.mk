@@ -6,10 +6,10 @@ database.connect: ## Connect to database
 	docker-compose exec db psql -Upostgres
 
 database.migrate: ## Create alembic migration file
-	docker-compose run --rm server python src/manage.py db migrate
+	docker-compose run --rm server python app/src/manage.py db migrate
 
 database.upgrade: ## Upgrade to latest migration
-	docker-compose run --rm server python src/manage.py db upgrade
+	docker-compose run --rm server python app/src/manage.py db upgrade
 
 database.downgrade: ## Downgrade latest migration
-	docker-compose run --rm server python src/manage.py db downgrade
+	docker-compose run --rm server python app/src/manage.py db downgrade

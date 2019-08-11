@@ -27,7 +27,8 @@ Then install dependencies and check that it works
 
 ```bash
 $ make database.upgrade    # Create necessary tables
-$ make server.start        # Run the container containing your local python server
+$ make server.daemon       # Run the container containing your local python server
+$ make server.logs         # Get server container logs
 ```
 
 If everything works, you should see the available routes [here](http://127.0.0.1:3000/application/spec).
@@ -45,7 +46,7 @@ While developing, you will probably rely mostly on `make server.start`; however,
 | `help`               | Display availables make commands                                             |
 | `server.start`       | Run your local server in its own docker container.                           |
 | `server.daemon`      | Run your local server in its own docker container as a daemon.               |
-| `server.upgrade`     | Upgrade pip packages interactively.                                          |
+| `server.logs`        | Get local server logs.                                                       |
 | `database.connect`   | Connect to your docker database.                                             |
 | `database.migrate`   | Generate a database migration file using alembic, based on your model files. |
 | `database.upgrade`   | Run the migrations until your database is up to date.                        |

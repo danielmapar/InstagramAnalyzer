@@ -7,6 +7,10 @@ HOST = os.getenv("APPLICATION_HOST")
 PORT = int(os.getenv("APPLICATION_PORT", "3000"))
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+RABBIT_MQ_URL = os.getenv("RABBIT_MQ_URL", "rabbitmq")
+CELERY_BROKER_URL = f"pyamqp://guest@{RABBIT_MQ_URL}//"
+CELERY_RESULT_BACKEND = f"pyamqp://guest@{RABBIT_MQ_URL}//"
+
 DB_CONTAINER = os.getenv("APPLICATION_DB_CONTAINER", "db")
 POSTGRES = {
     "user": os.getenv("APPLICATION_POSTGRES_USER", "postgres"),

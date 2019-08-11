@@ -1,0 +1,10 @@
+FROM python:3.7
+
+RUN mkdir -p /home/app/
+WORKDIR /home/app/
+
+COPY ./app/src/tasks.py .
+
+RUN pip install --upgrade pip --no-cache-dir celery==4.3.0
+
+ENTRYPOINT celery -A /home/app/tasks worker --loglevel=info
